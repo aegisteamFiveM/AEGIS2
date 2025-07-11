@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEGIS - Kullanıcı Portalı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Portal Özel Stilleri */
+        .portal-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 100px 20px;
+            min-height: 100vh;
+        }
+        
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .portal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .welcome-message {
+            font-size: 24px;
+            color: #ffffff;
+        }
+        
+        .portal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .portal-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .portal-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .portal-card h2 {
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+        
+        .license-input {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .license-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 4px 0 0 4px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+        
+        .license-input button {
+            padding: 12px 20px;
+            border-radius: 0 4px 4px 0;
+            border: none;
+            background: #4361ee;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .license-input button:hover {
+            background: #2f4ad0;
+        }
+        
+        #license-error, #license-success {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        #license-error {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #ff8a80;
+        }
+        
+        #license-success {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #b9f6ca;
+        }
+        
+        .license-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .license-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .license-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .license-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .license-status {
+            border-radius: 15px;
+            padding: 3px 10px;
+            font-size: 12px;
+        }
+        
+        .license-active {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #b9f6ca;
+        }
+        
+        .license-expired {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #ff8a80;
+        }
+        
+        .server-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .server-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .server-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .server-name {
+            flex: 1;
+            font-weight: bold;
+        }
+        
+        .server-status {
+            font-size: 14px;
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+        
+        .status-online {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #b9f6ca;
+        }
+        
+        .status-offline {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #ff8a80;
+        }
+        
+        .not-logged-in {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
+            text-align: center;
+        }
+        
+        .not-logged-in h2 {
+            margin-bottom: 20px;
+        }
+        
+        .login-portal {
+            background: #4361ee;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .login-portal:hover {
+            background: #2f4ad0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .discord-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .discord-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">AEGIS</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#features">Özellikler</a></li>
+                    <li><a href="index.html#pricing">Fiyatlandırma</a></li>
+                    <li><a href="index.html#faq">SSS</a></li>
+                    <li><a href="#" class="login-btn"><i class="fab fa-discord"></i> Giriş Yap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="portal-section" id="portal">
+        <div class="portal-container">
+            <div class="portal-header">
+                <h1 class="welcome-message">Kullanıcı Portalına Hoş Geldiniz</h1>
+                <div id="user-info">
+                    <!-- Kullanıcı bilgisi burada görüntülenecek -->
+                </div>
+            </div>
+            
+            <div id="login-required" class="not-logged-in">
+                <h2>Bu sayfayı görüntülemek için giriş yapmalısınız</h2>
+                <p>Lisans yönetimi ve sunucu ayarları için lütfen Discord hesabınızla giriş yapın.</p>
+                <a href="#" class="login-portal login-btn"><i class="fab fa-discord"></i> Discord ile Giriş Yap</a>
+            </div>
+            
+            <div id="portal-content" class="portal-content" style="display:none;">
+                <div class="portal-card">
+                    <h2>Lisans Yönetimi</h2>
+                    <div class="discord-info" id="discord-info">
+                        <!-- Discord bilgileri burada gösterilecek -->
+                    </div>
+                    
+                    <form class="license-input">
+                        <input type="text" placeholder="Lisans anahtarını buraya giriniz">
+                        <button type="submit">Aktifleştir</button>
+                    </form>
+                    
+                    <div id="license-error"></div>
+                    <div id="license-success"></div>
+                    
+                    <h3>Aktif Lisanslarınız</h3>
+                    <div id="active-licenses">
+                        <!-- Lisanslar buraya eklenecek -->
+                        <p>Lisanslarınız yükleniyor...</p>
+                    </div>
+                </div>
+                
+                <div class="portal-card">
+                    <h2>Sunucu Yönetimi</h2>
+                    <p>AEGIS'in kurulu olduğu sunucuların durumunu buradan takip edebilirsiniz.</p>
+                    
+                    <ul class="server-list">
+                        <!-- Örnek sunucular (normalde API'den gelecek) -->
+                        <li class="server-item">
+                            <div class="server-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="server-name">FiveM Roleplay Sunucum</div>
+                            <div class="server-status status-online">Aktif</div>
+                        </li>
+                        <li class="server-item">
+                            <div class="server-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="server-name">Test Sunucusu</div>
+                            <div class="server-status status-offline">Çevrimdışı</div>
+                        </li>
+                    </ul>
+                    
+                    <h3>Ayarlar</h3>
+                    <p>Sunucu ayarlarını ve yapılandırmaları Discord botumuz üzerinden yapabilirsiniz.</p>
+                    <a href="https://discord.gg/your-invite-link" class="btn" target="_blank"><i class="fab fa-discord"></i> Discord Sunucusuna Katıl</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>AEGIS</h3>
+                    <p>FiveM sunucuları için AI destekli anti-cheat koruması. Hilecileri durdurun, topluluğunuzu koruyun.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigasyon</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="index.html#features">Özellikler</a></li>
+                        <li><a href="index.html#pricing">Fiyatlandırma</a></li>
+                        <li><a href="index.html#faq">SSS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Yasal</h3>
+                    <ul>
+                        <li><a href="hizmet-sartlari.html">Hizmet Şartları</a></li>
+                        <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                        <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li><a href="https://discord.gg/your-invite-link" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+                        <li><a href="mailto:contact@aegis-ac.com"><i class="far fa-envelope"></i> Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AEGIS Anti-Cheat. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Kullanıcı oturum durumunu kontrol et
+            const accessToken = localStorage.getItem('discord_access_token');
+            const userData = localStorage.getItem('user_data');
+            
+            if (accessToken && userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    // Kullanıcı giriş yapmış, portal içeriğini göster
+                    document.getElementById('login-required').style.display = 'none';
+                    document.getElementById('portal-content').style.display = 'grid';
+                    
+                    // Discord bilgilerini göster
+                    const discordInfo = document.getElementById('discord-info');
+                    if (discordInfo) {
+                        discordInfo.innerHTML = `
+                            <img src="${user.avatar}" alt="Discord Avatar" class="discord-avatar">
+                            <div>
+                                <h3>${user.username}</h3>
+                                <p>Discord ID: ${user.id}</p>
+                            </div>
+                        `;
+                    }
+                    
+                    // Lisansları güncelle
+                    updateLicensesList();
+                    
+                } catch (e) {
+                    console.error("Oturum verisini ayrıştırma hatası:", e);
+                    // Giriş sayfasını göster
+                    showLoginPage();
+                }
+            } else {
+                // Giriş sayfasını göster
+                showLoginPage();
+            }
+        });
+        
+        function showLoginPage() {
+            document.getElementById('login-required').style.display = 'flex';
+            document.getElementById('portal-content').style.display = 'none';
+        }
+    </script>
+</body>
+</html> 

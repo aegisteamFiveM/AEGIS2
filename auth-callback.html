@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEGIS - Giriş İşlemi</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .callback-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .loading {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin: 30px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .success-message {
+            color: #4CAF50;
+            margin-top: 20px;
+            display: none;
+        }
+        .error-message {
+            color: #F44336;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="callback-container">
+        <h1>AEGIS Discord Girişi</h1>
+        <p>Giriş işlemi tamamlanıyor, lütfen bekleyin...</p>
+        <div class="loading"></div>
+        <p class="success-message" id="success-msg">Giriş başarılı! Yönlendiriliyorsunuz...</p>
+        <p class="error-message" id="error-msg">Bir hata oluştu. Lütfen tekrar deneyiniz.</p>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Sayfa yüklendikten 3 saniye sonra otomatik olarak ana sayfaya yönlendir
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL parametrelerini kontrol et
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const error = urlParams.get('error');
+            
+            if (code) {
+                // Auth.js içindeki fonksiyonların çalışması bekleniyor
+                // İşlem başarılı ise
+                setTimeout(function() {
+                    document.getElementById('success-msg').style.display = 'block';
+                    document.querySelector('.loading').style.display = 'none';
+                    
+                    // Ana sayfaya yönlendir
+                    setTimeout(function() {
+                        window.location.href = window.location.origin + '/portal.html';
+                    }, 1000);
+                }, 3000);
+            } else if (error) {
+                // Hata durumu
+                document.getElementById('error-msg').textContent = 'Giriş sırasında bir hata oluştu: ' + error;
+                document.getElementById('error-msg').style.display = 'block';
+                document.querySelector('.loading').style.display = 'none';
+                
+                // Ana sayfaya yönlendir
+                setTimeout(function() {
+                    window.location.href = window.location.origin;
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEGIS - Yapay Zeka ile Adil Oyunun Kalkanı</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* İlave stillemeler */
+        .hero-content {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-image {
+            margin-top: 50px;
+        }
+        
+        .hero-animation {
+            background: conic-gradient(from 0deg at 50% 50%, #3a86ff, #5e17eb, #3a86ff);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            box-shadow: 0 0 40px rgba(58, 134, 255, 0.5);
+        }
+        
+        .login-btn {
+            background-color: #7289DA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #5b6eae;
+        }
+        
+        .login-btn i {
+            font-size: 18px;
+        }
+        
+        .portal-section {
+            background-color: #f0f2f5;
+            padding: 100px 0;
+        }
+        
+        .portal-container {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .portal-content {
+            flex: 1;
+        }
+        
+        .portal-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .portal-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .license-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+        
+        .license-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .license-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .license-input button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .license-example {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2 style="color: #3a86ff; font-weight: 700; font-size: 28px; letter-spacing: 1px;">AEGIS</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Özellikler</a></li>
+                <li><a href="#pricing">Fiyatlandırma</a></li>
+                <li><a href="#portal">Müşteri Portalı</a></li>
+                <li><a href="#faq">SSS</a></li>
+                <li><a href="#contact" class="btn btn-outline">İletişim</a></li>
+            </ul>
+            <button class="login-btn" style="margin-left: 15px;"><i class="fab fa-discord"></i> Giriş Yap</button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Yapay Zeka ile Adil Oyunun Kalkanı: <span style="color: #3a86ff; font-weight: 700;">AEGIS</span></h1>
+                <p style="font-size: 1.2rem; margin-bottom: 30px;">FiveM sunucunuzu, oyuncu performansını etkilemeden, yeni nesil davranışsal analiz ile koruyun.</p>
+                <div class="hero-buttons">
+                    <a href="#pricing" class="btn btn-primary" style="margin-right: 15px;">Fiyatları İncele</a>
+                    <a href="#features" class="btn btn-secondary">Nasıl Çalışır?</a>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="hero-animation" style="margin-top: 50px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>AEGIS'in Benzersiz Özellikleri</h2>
+                <p>Neden AEGIS diğer anti-hile sistemlerinden farklı?</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Sadece Davranışa Odaklanır</h3>
+                    <p>Geleneksel anti-hilelerin aksine, bilinen hileleri aramaz. Oyuncunun fare hareketlerini analiz ederek insan ve makine davranışını ayırt eder.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Adil Oyuncuları Ödüllendirir</h3>
+                    <p>Dinamik Güven Faktörü sistemi ile temiz oyuncuları daha az rahatsız ederken, şüpheli oyuncuları daha yakından takip eder.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Sunucunuzu ve Oyuncularınızı Yormaz</h3>
+                    <p>Tüm yapay zeka analizleri harici sunucularımızda yapılır. Oyun sunucunuza veya oyuncularınızın FPS'ine sıfır etki.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ghost"></i>
+                    </div>
+                    <h3>Oyunu Hileciye Zehir Eder</h3>
+                    <p>Yüksek şüpheyle tespit edilen hilecilere, sunucudan atılmadan önce oyunu oynanamaz hale getiren caydırıcılar uygular.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fiyatlandırma Planları</h2>
+                <p>Sunucunuzun ihtiyacına uygun çözümler</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Başlangıç</h3>
+                        <p class="price">₺299<span>/aylık</span></p>
+                    </div>
+                    <div class="pricing-features">
+                        <p><i class="fas fa-check"></i> 50 oyuncuya kadar destek</p>
+                        <p><i class="fas fa-check"></i> 7/24 teknik destek</p>
+                        <p><i class="fas fa-check"></i> Temel davranış analizi</p>
+                        <p><i class="fas fa-check"></i> Haftalık raporlar</p>
+                        <p class="disabled"><i class="fas fa-times"></i> Özel caydırıcılar</p>
+                        <p class="disabled"><i class="fas fa-times"></i> Özelleştirme seçenekleri</p>
+                    </div>
+                    <a href="#contact" class="btn btn-outline">Satın Al</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="pricing-badge">En Popüler</div>
+                    <div class="pricing-header">
+                        <h3>Profesyonel</h3>
+                        <p class="price">₺599<span>/aylık</span></p>
+                    </div>
+                    <div class="pricing-features">
+                        <p><i class="fas fa-check"></i> 100 oyuncuya kadar destek</p>
+                        <p><i class="fas fa-check"></i> 7/24 öncelikli teknik destek</p>
+                        <p><i class="fas fa-check"></i> Gelişmiş davranış analizi</p>
+                        <p><i class="fas fa-check"></i> Günlük detaylı raporlar</p>
+                        <p><i class="fas fa-check"></i> Özel caydırıcılar</p>
+                        <p class="disabled"><i class="fas fa-times"></i> Özelleştirme seçenekleri</p>
+                    </div>
+                    <a href="#contact" class="btn btn-primary">Satın Al</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Kurumsal</h3>
+                        <p class="price">Özel<span> fiyatlandırma</span></p>
+                    </div>
+                    <div class="pricing-features">
+                        <p><i class="fas fa-check"></i> Sınırsız oyuncu desteği</p>
+                        <p><i class="fas fa-check"></i> 7/24 VIP teknik destek</p>
+                        <p><i class="fas fa-check"></i> Gelişmiş davranış analizi</p>
+                        <p><i class="fas fa-check"></i> Gerçek zamanlı raporlar</p>
+                        <p><i class="fas fa-check"></i> Özel caydırıcılar</p>
+                        <p><i class="fas fa-check"></i> Tam özelleştirme seçenekleri</p>
+                    </div>
+                    <a href="#contact" class="btn btn-outline">Teklif Al</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Customer Portal Section -->
+    <section id="portal" class="portal-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Müşteri Portalı</h2>
+                <p>Lisanslarınızı kolayca yönetin</p>
+            </div>
+            
+            <div class="portal-container">
+                <div class="portal-content">
+                    <h3>Lisanslarınızı Tek Yerden Yönetin</h3>
+                    <p>AEGIS Müşteri Portalı ile tüm lisanslarınızı görüntüleyebilir, yeni lisans aktifleştirebilir ve hesap ayarlarınızı düzenleyebilirsiniz.</p>
+                    
+                    <div class="license-form">
+                        <h4>Lisans Aktifleştirme</h4>
+                        <p>Satın aldığınız lisans anahtarını girerek hemen kullanmaya başlayın.</p>
+                        
+                        <div class="license-input">
+                            <input type="text" placeholder="AEGIS-XXXX-XXXX-XXXX">
+                            <button>Aktifleştir</button>
+                        </div>
+                        <p class="license-example">Örnek Format: AEGIS-1234-ABCD-5678</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h4>Portal Özellikleri</h4>
+                        <ul style="list-style-type: none; padding-left: 0;">
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> Discord ile kolay giriş</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> Aktif lisanslarınızı görüntüleme</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> Abonelik sürenizi takip etme</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> Kayıtlı sunucularınızı yönetme</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portal-image">
+                    <div style="background-color: #1e2124; color: white; border-radius: 10px; padding: 20px; text-align: left;">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 50px; height: 50px; background-color: #7289DA; border-radius: 50%; margin-right: 15px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 24px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="margin: 0;">Hoş geldin, ServerOwner123!</h4>
+                                <p style="margin: 5px 0 0; color: #a0a0a0;">Discord ID: #1234</p>
+                            </div>
+                        </div>
+                        
+                        <div style="background-color: #2f3136; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                            <h4 style="margin-top: 0; color: #7289DA;">Aktif Lisanslarım</h4>
+                            <div style="background-color: #36393f; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>AEGIS-1234-...</span>
+                                    <span style="color: #43b581;">Aktif</span>
+                                </div>
+                                <div style="margin-top: 5px; font-size: 14px; color: #a0a0a0;">
+                                    <span>IP: 185.193.xx.xx</span>
+                                    <span style="margin-left: 15px;">Kalan Süre: 29 gün</span>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #36393f; padding: 10px; border-radius: 5px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>AEGIS-5678-...</span>
+                                    <span style="color: #f04747;">Süresi Dolmuş</span>
+                                </div>
+                                <div style="margin-top: 5px; font-size: 14px; color: #a0a0a0;">
+                                    <span>IP: 193.164.xx.xx</span>
+                                    <span style="margin-left: 15px;">Kalan Süre: 0 gün</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sıkça Sorulan Sorular</h2>
+                <p>AEGIS hakkında merak edilenler</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>AEGIS nasıl çalışır?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AEGIS, oyuncuların fare ve klavye hareketlerini yapay zeka ile analiz eder. İnsan davranışı ve makine destekli hareketler arasındaki farkları tespit ederek çalışır. Tüm analiz işlemleri bizim sunucularımızda gerçekleşir, bu sayede oyun performansı etkilenmez.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>AEGIS'i sunucuma nasıl entegre ederim?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Kurulum son derece basittir. Satın alma işleminizden sonra size özel bir script ve API anahtarı verilecektir. Bu scripti FiveM sunucunuza eklemeniz yeterlidir. Kurulum sırasında teknik ekibimiz size destek sağlayacaktır.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>AEGIS oyuncu FPS'ini etkiler mi?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Hayır. AEGIS, oyuncuların FPS'ini etkilemeyecek şekilde tasarlanmıştır. Tüm ağır hesaplamalar bizim sunucularımızda gerçekleşir ve sonuçlar sunucunuza iletilir. Bu sayede oyuncularınızın deneyimi olumsuz etkilenmez.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Yanlış pozitif tespitler olabilir mi?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AEGIS, yanlış pozitif tespitleri minimuma indirmek için Güven Faktörü sistemi kullanır. Şüpheli bir davranış tespit edildiğinde sistem hemen ban atmaz, oyuncuyu daha yakından takip eder. Ayrıca, sistem sürekli olarak kendini geliştirir ve öğrenir.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>AEGIS hangi hilelerle mücadele eder?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AEGIS'in güzelliği, belirli hileleri aramak yerine doğal olmayan oyuncu davranışlarını tespit etmesidir. Bu sayede aimbot, triggerbot, makro kullanımı gibi birçok hile türünü tespit edebilir, hatta daha önce görülmemiş hileleri bile tanıyabilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Bizimle İletişime Geçin</h2>
+                <p>Sorularınız için buradayız</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@aegis-anticheat.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-discord"></i>
+                        <p>discord.gg/aegis</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>7/24 Teknik Destek</p>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="İsim Soyisim" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="E-posta Adresi" required>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="" disabled selected>Konu Seçin</option>
+                            <option value="sales">Satış Bilgisi</option>
+                            <option value="support">Teknik Destek</option>
+                            <option value="partnership">İş Birliği</option>
+                            <option value="other">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Mesajınız" required rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <h2 style="color: white; font-weight: 700;">AEGIS</h2>
+                    <p>Yapay Zeka ile Adil Oyunun Kalkanı</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-link-group">
+                        <h4>Sayfalar</h4>
+                        <ul>
+                            <li><a href="#features">Özellikler</a></li>
+                            <li><a href="#pricing">Fiyatlandırma</a></li>
+                            <li><a href="#portal">Müşteri Portalı</a></li>
+                            <li><a href="#faq">SSS</a></li>
+                            <li><a href="#contact">İletişim</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-link-group">
+                        <h4>Yasal</h4>
+                        <ul>
+                            <li><a href="hizmet-sartlari.html">Hizmet Şartları</a></li>
+                            <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                            <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-link-group">
+                        <h4>Sosyal Medya</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AEGIS Anti-Cheat. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
