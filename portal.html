@@ -4,249 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEGIS - Kullanıcı Portalı</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* Portal Özel Stilleri */
-        .portal-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 100px 20px;
-            min-height: 100vh;
-        }
-        
-        .portal-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .portal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .welcome-message {
-            font-size: 24px;
-            color: #ffffff;
-        }
-        
-        .portal-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .portal-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .portal-card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-        
-        .portal-card h2 {
-            color: #ffffff;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-        }
-        
-        .license-input {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        
-        .license-input input {
-            flex: 1;
-            padding: 12px 15px;
-            border-radius: 4px 0 0 4px;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
-        }
-        
-        .license-input button {
-            padding: 12px 20px;
-            border-radius: 0 4px 4px 0;
-            border: none;
-            background: #4361ee;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .license-input button:hover {
-            background: #2f4ad0;
-        }
-        
-        #license-error, #license-success {
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 10px;
-            display: none;
-        }
-        
-        #license-error {
-            background: rgba(244, 67, 54, 0.1);
-            border: 1px solid rgba(244, 67, 54, 0.5);
-            color: #ff8a80;
-        }
-        
-        #license-success {
-            background: rgba(76, 175, 80, 0.1);
-            border: 1px solid rgba(76, 175, 80, 0.5);
-            color: #b9f6ca;
-        }
-        
-        .license-item {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s;
-        }
-        
-        .license-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .license-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        
-        .license-details {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .license-status {
-            border-radius: 15px;
-            padding: 3px 10px;
-            font-size: 12px;
-        }
-        
-        .license-active {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid rgba(76, 175, 80, 0.5);
-            color: #b9f6ca;
-        }
-        
-        .license-expired {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid rgba(244, 67, 54, 0.5);
-            color: #ff8a80;
-        }
-        
-        .server-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .server-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .server-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .server-name {
-            flex: 1;
-            font-weight: bold;
-        }
-        
-        .server-status {
-            font-size: 14px;
-            padding: 3px 10px;
-            border-radius: 15px;
-        }
-        
-        .status-online {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid rgba(76, 175, 80, 0.5);
-            color: #b9f6ca;
-        }
-        
-        .status-offline {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid rgba(244, 67, 54, 0.5);
-            color: #ff8a80;
-        }
-        
-        .not-logged-in {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 50vh;
-            text-align: center;
-        }
-        
-        .not-logged-in h2 {
-            margin-bottom: 20px;
-        }
-        
-        .login-portal {
-            background: #4361ee;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .login-portal:hover {
-            background: #2f4ad0;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .discord-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .discord-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/portal.css">
 </head>
 
 <body>
@@ -408,6 +168,18 @@
             } else {
                 // Giriş sayfasını göster
                 showLoginPage();
+            }
+            
+            // Lisans aktivasyon formunu dinle
+            const licenseForm = document.querySelector('.license-input');
+            if (licenseForm) {
+                licenseForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const licenseKey = this.querySelector('input').value.trim();
+                    if (licenseKey) {
+                        activateLicense(licenseKey);
+                    }
+                });
             }
         });
         

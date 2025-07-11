@@ -31,6 +31,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Discord Login Button
+    const loginBtn = document.querySelector('.login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'portal.html';
+        });
+    }
+    
+    // License Activation Button
+    const activateBtn = document.querySelector('.activate-btn');
+    if (activateBtn) {
+        activateBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'portal.html';
+        });
+    }
+    
     // FAQ accordion functionality
     const faqItems = document.querySelectorAll('.faq-item');
     
@@ -52,12 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Scroll animations
     const fadeElements = document.querySelectorAll('.fade-in');
-    
-    // Add 'fade-in' class to elements that should animate on scroll
-    // const sections = document.querySelectorAll('section'); // This line is removed as per new_code
-    // sections.forEach(section => { // This line is removed as per new_code
-    //     section.classList.add('fade-in'); // This line is removed as per new_code
-    // }); // This line is removed as per new_code
     
     // Function to check if element is in viewport
     function isInViewport(element) {

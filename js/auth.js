@@ -1,7 +1,7 @@
 // AEGIS Auth System - Discord OAuth2 ve PythonAnywhere API Entegrasyonu
 
 // Discord OAuth2 Yapılandırması
-const DISCORD_CLIENT_ID = "YOUR_DISCORD_CLIENT_ID"; // Discord Developer Portal'dan alınacak
+const DISCORD_CLIENT_ID = "1234567890123456789"; // Discord Developer Portal'dan alınacak Client ID
 const DISCORD_REDIRECT_URI = window.location.origin + "/auth-callback.html"; // GitHub Pages için doğru URL
 const DISCORD_API_ENDPOINT = "https://discord.com/api/v10";
 
