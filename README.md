@@ -1,49 +1,65 @@
-# AEGIS Anti-Cheat
+# AEGIS Anti-Cheat Lisans Sistemi
 
-FiveM sunucuları için AI destekli anti-cheat koruması.
+AEGIS Anti-Cheat için Discord entegrasyonlu lisans yönetim sistemi.
 
-## Kurulum
+## Proje Yapısı
 
-1. Bu repoyu GitHub Pages olarak yayınlayın
-2. Lisans sunucunuzu ayrı bir sunucuda çalıştırın
-3. `js/auth.js` dosyasında `LICENSE_SERVER_URL` değişkenini güncelleyin
-4. Discord Developer Portal'dan bir uygulama oluşturun ve bilgileri güncelleyin
+- `index.html` - Ana sayfa
+- `portal.html` - Kullanıcı portalı
+- `auth-callback.html` - Discord OAuth2 callback sayfası
+- `aegis_license_server.py` - Lisans sunucusu (PythonAnywhere'de çalışır)
+- `js/auth.js` - Discord OAuth2 ve lisans yönetimi için JavaScript
+- `js/config.js` - Yapılandırma değerlerini yönetmek için JavaScript
 
-## Özellikler
+## GitHub Secrets Kullanımı
 
-- Discord ile giriş yapma
-- Lisans aktivasyonu
-- Kullanıcı portalı
-- Lisans yönetimi
+Bu proje, hassas yapılandırma değerlerini GitHub Secrets kullanarak güvenli bir şekilde yönetir. GitHub Secrets, hassas verileri (API anahtarları, token'lar vb.) güvenli bir şekilde saklamanıza olanak tanır.
 
-## PythonAnywhere Kurulumu
+### GitHub Secrets Nasıl Ayarlanır
+
+1. GitHub'da projenize gidin
+2. "Settings" (Ayarlar) sekmesine tıklayın
+3. Sol menüden "Secrets and variables" > "Actions" seçeneğine tıklayın
+4. "New repository secret" (Yeni depo sırrı) butonuna tıklayın
+5. Aşağıdaki sırları ekleyin:
+
+   - `DISCORD_CLIENT_ID`: Discord Developer Portal'dan aldığınız Client ID
+   - `LICENSE_SERVER_URL`: PythonAnywhere'deki lisans sunucunuzun URL'si (örn: https://kullanici-adiniz.pythonanywhere.com)
+
+### Nasıl Çalışır
+
+1. GitHub Actions, `deploy.yml` workflow dosyasını kullanarak derleme ve dağıtım işlemini gerçekleştirir
+2. Derleme sırasında, GitHub Secrets'dan alınan değerler `js/config.js` dosyasına enjekte edilir
+3. Frontend uygulaması, bu değerleri kullanarak Discord OAuth2 ve lisans sunucusu ile iletişim kurar
+
+## Geliştirme
+
+Yerel geliştirme için:
+
+1. `js/config.js` dosyasını düzenleyerek geliştirme değerlerini ayarlayın
+2. Bir HTTP sunucusu başlatın: `python -m http.server` veya başka bir yerel sunucu kullanın
+3. Tarayıcıda `http://localhost:8000` adresine gidin
+
+## Dağıtım
+
+Projeyi GitHub Pages'a dağıtmak için:
+
+1. GitHub Secrets'ı yukarıdaki talimatlara göre ayarlayın
+2. Değişikliklerinizi `main` dalına push edin
+3. GitHub Actions otomatik olarak projeyi derleyecek ve `gh-pages` dalına dağıtacaktır
+
+## PythonAnywhere Yapılandırması
+
+PythonAnywhere'de lisans sunucusunu yapılandırmak için:
 
 1. PythonAnywhere'de bir hesap oluşturun
-2. Web sekmesinde yeni bir web uygulaması oluşturun ve "manual configuration" seçin
-3. Python sürümünü seçin (örn: Python 3.9)
-4. Dosyaları PythonAnywhere hesabınıza yükleyin:
-   - aegis_license_server.py
-   - pythonanywhere_wsgi.py (adını sadece wsgi.py olarak değiştirin)
-   - requirements.txt
-   - config.py
-5. .env dosyası oluşturun ve çevre değişkenlerini ayarlayın:
-   ```
-   DISCORD_CLIENT_ID=YOUR_DISCORD_CLIENT_ID
-   DISCORD_CLIENT_SECRET=YOUR_DISCORD_CLIENT_SECRET
-   DISCORD_REDIRECT_URI=https://GITHUB_USERNAME.github.io/REPO_NAME/auth-callback.html
-   ADMIN_API_KEY=""
-   DEBUG=False
-   ```
-6. PythonAnywhere konsolunda şu komutu çalıştırın:
-   ```bash
-   pip install -r requirements.txt
-   ```
-7. WSGI dosyasında kullanıcı adınızı güncelleyin
-8. Web uygulamanızı yeniden başlatın
+2. Dosyaları yükleyin: `aegis_license_server.py`, `config.py`, `requirements.txt`, `pythonanywhere_wsgi.py`
+3. Bir veritabanı oluşturun
+4. WSGI dosyasını yapılandırın
+5. `.env` dosyasında veya PythonAnywhere'in çevre değişkenlerinde Discord Client Secret'ı ayarlayın
 
-## GitHub Pages Kurulumu
+## Güvenlik Notları
 
-1. Bu repoyu GitHub'a yükleyin
-2. GitHub repository ayarlarından Pages özelliğini etkinleştirin
-3. `js/auth.js` dosyasındaki `LICENSE_SERVER_URL` değişkenini PythonAnywhere URL'niz ile güncelleyin
-4. Discord Developer Portal'dan bir uygulama oluşturun ve bilgileri güncelleyin 
+- Client ID genellikle genel olarak bilinebilir, ancak yine de GitHub Secrets kullanarak saklıyoruz
+- Client Secret **ASLA** frontend kodunda saklanmamalıdır - bu değer yalnızca backend'de (PythonAnywhere) kullanılmalıdır
+- GitHub Secrets, GitHub Actions tarafından derleme sırasında kullanılır ve depo tarihçesinde veya kaynak kodda görünmez 

@@ -1,19 +1,30 @@
 // AEGIS Auth System - Discord OAuth2 ve PythonAnywhere API Entegrasyonu
 
-// Discord OAuth2 Yapılandırması
-const DISCORD_CLIENT_ID = "1234567890123456789"; // Discord Developer Portal'dan alınacak Client ID
-const DISCORD_REDIRECT_URI = window.location.origin + "/auth-callback.html"; // GitHub Pages için doğru URL
+// Yapılandırma değerlerini dinamik olarak yükle
+let DISCORD_CLIENT_ID = null;
+let DISCORD_REDIRECT_URI = window.location.origin + "/auth-callback.html"; // GitHub Pages için doğru URL
 const DISCORD_API_ENDPOINT = "https://discord.com/api/v10";
 
-// API Yapılandırması - PythonAnywhere URL'sini girin
-const LICENSE_SERVER_URL = "https://onur717106.pythonanywhere.com"; // PythonAnywhere kullanıcı adınızla değiştirin
+// API Yapılandırması - PythonAnywhere URL'si dinamik olarak yüklenecek
+let LICENSE_SERVER_URL = null;
 
 // Kullanıcı Bilgileri ve Yetkilendirme
 let currentUser = null;
 let accessToken = null;
+let configLoaded = false;
 
-// Discord ile Giriş Yap Butonlarını Başlatma
-document.addEventListener('DOMContentLoaded', function() {
+// Yapılandırma yüklendiğinde çağrılacak fonksiyon
+async function initializeAuth() {
+    // Yapılandırma değerlerini al
+    const config = await window.AEGIS_CONFIG.getConfig();
+    
+    // Yapılandırma değerlerini ayarla
+    DISCORD_CLIENT_ID = config.DISCORD_CLIENT_ID;
+    LICENSE_SERVER_URL = config.LICENSE_SERVER_URL;
+    configLoaded = true;
+    
+    console.log("Auth sistemi başlatıldı");
+    
     // LocalStorage'dan önceki oturumu kontrol et
     checkExistingSession();
     
@@ -22,13 +33,32 @@ document.addEventListener('DOMContentLoaded', function() {
     loginButtons.forEach(button => {
         button.addEventListener('click', initiateDiscordLogin);
     });
+}
+
+// Discord ile Giriş Yap Butonlarını Başlatma
+document.addEventListener('DOMContentLoaded', function() {
+    // Yapılandırma yüklendiğinde auth sistemini başlat
+    if (window.AEGIS_CONFIG && window.AEGIS_CONFIG.getConfig) {
+        initializeAuth();
+    } else {
+        // config.js yüklenmemişse, yüklendiğinde dinle
+        document.addEventListener('configLoaded', initializeAuth);
+    }
     
     // Auth callback'ten döndüyse parametreleri işle
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     
     if (code) {
-        exchangeCodeForToken(code);
+        // Yapılandırma yüklendiğinde token al
+        if (configLoaded) {
+            exchangeCodeForToken(code);
+        } else {
+            // Yapılandırma yüklendiğinde token al
+            document.addEventListener('configLoaded', function() {
+                exchangeCodeForToken(code);
+            });
+        }
     }
 });
 
@@ -51,6 +81,11 @@ function checkExistingSession() {
 
 // Discord login sürecini başlat
 function initiateDiscordLogin() {
+    if (!configLoaded) {
+        console.error("Yapılandırma henüz yüklenmedi, lütfen bekleyin.");
+        return;
+    }
+    
     const scope = 'identify';
     const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(DISCORD_REDIRECT_URI)}&response_type=code&scope=${scope}`;
     
